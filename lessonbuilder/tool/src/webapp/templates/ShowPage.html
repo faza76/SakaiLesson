@@ -424,18 +424,19 @@
 			<span rsf:id="addbottom" class="sectionedit addbottom"><a role="button" aria-haspopup="dialog" aria-controls="addContentDiv" rsf:id="addbottom2" class="add-bottom" href="#" ><span aria-hidden="true" class="fa-plus fa-edit-icon plus-edit-icon"></span></a></span>
 
                         <div class="indent mainList" rsf:id="itemTable:" border="0" style="z-index: 1;" role="list" aria-labelledby="itemContainer::maintablelabel">
-                          <div>
-                            <p>
-                              <span>Created By : </span> <span rsf:id="createdname" class="creatorname">
+                          <div class="lessedit">
+                            <div class="createdcol">
+                              <span class="created"><b>Created By</b> </span> <span class="created" rsf:id="createdname" >
                               CREATED BY</span>
-                            </p>
-                            <p>
-                              <span>Created Date : </span><span rsf:id="createdate" class="creatorname">NOW   </span>
-                            </p>
+							          </div>
+							
+						          	<div class="lastmodifiedcol">
+                              <span class="lastmodified">on </span><span class="lastmodified" rsf:id="createdate" >NOW   </span>
+                        </div>
 
-                            <p>
+                            <!-- <p>
                               <span>Last Modified : </span><span rsf:id="lastmodified" class="creatorname">NOW   </span>
-                            </p>
+                            </p> -->
                           </div>
                 <div rsf:id="item:" id="item" role="listitem" class="item"><span style="display:none" rsf:id="itemid" class="itemid"></span><span style="display:none" rsf:id="pageid" class="pageid"></span>
                     <div rsf:id="group-td" aria-hidden="true" class="group-col"><div><a href="#" class="usebutton" onclick="return false" rsf:id="group-link"><span rsf:id="group-icon"></span></a></div></div>

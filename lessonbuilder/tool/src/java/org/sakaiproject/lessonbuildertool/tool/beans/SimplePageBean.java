@@ -8879,7 +8879,7 @@ public class SimplePageBean {
 		}
 		return status;
 	}
-
+	//modifikasi
 	public String getPageOwner(){
 		SimplePage current;
 		User user = null;
@@ -8902,6 +8902,18 @@ public class SimplePageBean {
 			return "NULL";
 		}
 
+	}
+
+	public String getUserModif(){
+		SimplePage current;
+		User user = null;
+		try{
+			user = UserDirectoryService.getUser(getCurrentPage().getLastModifiedBy());
+			String displayName = user.getDisplayName();
+			return displayName;
+		} catch(UserNotDefinedException e){
+			return null;
+		}
 	}
 
 	public String getLastModified(){

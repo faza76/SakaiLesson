@@ -2019,6 +2019,10 @@ public class SimplePageBean {
 				}
 			}
 
+			//dirubah
+			SimplePage mPage = getCurrentPage();
+			update(funSetLastModified(mPage));
+
 			return "successDelete";
 		} else {
 			log.warn("deleteItem error deleting Item: {}", itemId);
@@ -8916,6 +8920,17 @@ public class SimplePageBean {
 			return "NULL";
 		}
 
+	}
+
+	public SimplePage funSetLastModified(SimplePage mPage) {
+
+		// SimplePage mPage = getCurrentPage();
+		User user = UserDirectoryService.getCurrentUser();
+		mPage.setLastModifiedBy(user.getId());
+		Date d1 = new Date();
+		mPage.setLastModified(d1);
+		return mPage;
+		//update(mPage);
 	}
 
 

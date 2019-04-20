@@ -1766,17 +1766,12 @@ public class SimplePageBean {
 		}
 
 		SimplePageItem i = simplePageToolDao.makeItem(getCurrentPageId(), nseq, type, id, name);
+
+
 		//Editedscript
-
-
 		SimplePage mPage = getCurrentPage();
-
-		User user = UserDirectoryService.getCurrentUser();
-		mPage.setLastModifiedBy(user.getId());
-		Date d1 = new Date();
-		mPage.setLastModified(d1);
-		update(mPage);
-
+		update(funSetLastModified(mPage));
+   //Editedscript
 
 
 
@@ -2461,14 +2456,15 @@ public class SimplePageBean {
 				String title = getCurrentSite().getPage(toolId).getTitle(); // Use title supplied
 
 				// during creation
+
+				SimplePage page = simplePageToolDao.makePage(toolId, getCurrentSiteId(), title, null, null);
 				//Editedscript
 				User user = UserDirectoryService.getCurrentUser();
-				SimplePage page = simplePageToolDao.makePage(toolId, getCurrentSiteId(), title, null, null);
 				Date d1 = new Date();
 				page.setReleaseDate(d1);
 				page.setOwner(user.getId());
 				page.setOwned(true);
-				//EndEditedscript
+				//Editedscript
 				if (!saveItem(page)) {
 					currentPage = null;
 					return 0;
@@ -2817,17 +2813,21 @@ public class SimplePageBean {
 		SimplePage subpage;
 		if (makeNewPage) {
 		    subpage = simplePageToolDao.makePage(toolId, getCurrentSiteId(), title, parent, topParent);
+
+				//Editedscript
 		    subpage.setOwner(user.getId());
 				subpage.setOwned(true);
 				Date d1 = new Date();
 				subpage.setReleaseDate(d1);
+				//Editedscript
+
 		    // if(isStudentPage(page)){
 		    //     subpage.setOwned(false);
 		    // } else {
 		    //     subpage.setOwned(owner!=null);
 		    // }
 
-			//EndEditedscript
+
 		    subpage.setGroup(group);
 		    saveItem(subpage);
 		    selectedEntity = String.valueOf(subpage.getPageId());
@@ -3097,6 +3097,10 @@ public class SimplePageBean {
 
 			setItemGroups(i, selectedGroups);
 			update(i);
+
+			//dirubah
+			SimplePage mPage = getCurrentPage();
+			update(funSetLastModified(mPage));
 
 			return "successEdit"; // Shouldn't reload page
 		}
@@ -4646,27 +4650,31 @@ public class SimplePageBean {
 		String toolId = tool.getPageId();
 
 		SimplePage page;
+
 		//Editedscript
 		User user = UserDirectoryService.getCurrentUser();
 		Date d1 = new Date();
+		//Editedscript
 
 		if(pageId == null) {
 			page = simplePageToolDao.makePage(toolId, getCurrentSiteId(), title, null, null);
 
+			//Editedscript
 			page.setReleaseDate(d1);
 			page.setOwner(user.getId());
 			page.setOwned(true);
+			//Editedscript
 			saveItem(page);
 		}else {
 			page = getPage(pageId);
+			//Editedscript
 			page.setOwner(user.getId());
 			page.setOwned(true);
 			page.setToolId(toolId);
 			page.setParent(null);
 			page.setTopParent(null);
-			//Editedscript
 			page.setLastModified(d1);
-
+			//Editedscript
 			update(page);
 			title = page.getTitle();
 		}
@@ -7256,9 +7264,12 @@ public class SimplePageBean {
 			    groupId = groupEntry.id;
 			}
 			SimplePage newPage = simplePageToolDao.makePage(curr.getToolId(), curr.getSiteId(), title, curr.getPageId(), null);
+
+			//Editedscript
 			Date d1 = new Date();
 			newPage.setReleaseDate(d1);
 			newPage.setOwner(user.getId());
+			//Editedscript
 			newPage.setGroup(groupId);
 			//this is a student page so set 'owned' as false
 			newPage.setOwned(false);
@@ -8883,7 +8894,7 @@ public class SimplePageBean {
 		}
 		return status;
 	}
-	//modifikasi
+
 	public String getPageOwner(){
 		SimplePage current;
 		User user = null;
@@ -8906,18 +8917,6 @@ public class SimplePageBean {
 			return "NULL";
 		}
 
-	}
-
-	public String getUserModif(){
-		SimplePage current;
-		User user = null;
-		try{
-			user = UserDirectoryService.getUser(getCurrentPage().getLastModifiedBy());
-			String displayName = user.getDisplayName();
-			return displayName;
-		} catch(UserNotDefinedException e){
-			return null;
-		}
 	}
 
 	public String getLastModified(){

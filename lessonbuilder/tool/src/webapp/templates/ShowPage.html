@@ -14,6 +14,7 @@
  <link rsf:id="scr=portal-matter" href="/library/skin/default/tool.css" type="text/css" rel="stylesheet" media="all" />
  <link rel="stylesheet" rsf:id="scr=rewrite-url" href="../css/Simplepagetool.css" type="text/css" />
  <link rel="stylesheet" rsf:id="scr=rewrite-url" href="../css/checklist.css" type="text/css" />
+ <link rel="stylesheet" rsf:id="scr=rewrite-url" href="../css/Pageedit.css" type="text/css" />
  <title rsf:id="msg=simplepage.showpage"></title>
 
  <style type="text/css">
@@ -424,18 +425,17 @@
 			<span rsf:id="addbottom" class="sectionedit addbottom"><a role="button" aria-haspopup="dialog" aria-controls="addContentDiv" rsf:id="addbottom2" class="add-bottom" href="#" ><span aria-hidden="true" class="fa-plus fa-edit-icon plus-edit-icon"></span></a></span>
 
                         <div class="indent mainList" rsf:id="itemTable:" border="0" style="z-index: 1;" role="list" aria-labelledby="itemContainer::maintablelabel">
-                          <div>
-                            <p>
-                              <span>Created By : </span> <span rsf:id="createdname" class="creatorname">
-                              CREATED BY</span>
-                            </p>
-                            <p>
-                              <span>Created Date : </span><span rsf:id="createdate" class="creatorname">NOW   </span>
-                            </p>
+                          <!-- Modifikasi onoh -->
+                        <div class="lessedit">
+                            <div class="createdcol">
+                              <span class="created"><b>Created By</b> </span> <span class="created" rsf:id="createdname" >
+                              CREATED BY</span> <span class="created">On</span> <span class="created" rsf:id="createdate">NOW</span>
+						</div>							
+						<div class="lastmodifiedcol">
+                              <span class="lastmodified"><b>Last Modified By </b></span><span class="lastmodified" rsf:id="lastname" >Name</span>
+                              <span class="lastmodified">On </span><span class="lastmodified" rsf:id="lastdate">NOW</span>
+                        </div>
 
-                            <p>
-                              <span>Last Modified : </span><span rsf:id="lastmodified" class="creatorname">NOW   </span>
-                            </p>
                           </div>
                 <div rsf:id="item:" id="item" role="listitem" class="item"><span style="display:none" rsf:id="itemid" class="itemid"></span><span style="display:none" rsf:id="pageid" class="pageid"></span>
                     <div rsf:id="group-td" aria-hidden="true" class="group-col"><div><a href="#" class="usebutton" onclick="return false" rsf:id="group-link"><span rsf:id="group-icon"></span></a></div></div>

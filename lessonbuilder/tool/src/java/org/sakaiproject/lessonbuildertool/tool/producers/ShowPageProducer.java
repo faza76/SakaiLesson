@@ -399,6 +399,30 @@ public class ShowPageProducer implements ViewComponentProducer, DefaultView, Nav
 	// top level page and item if
 	// nothing is specified
 
+	//modifikasi
+	public String stringDate(Date date){
+		DateFormat dateformat = new SimpleDateFormat("dd/MM/yy");
+
+		if(date != null){
+			return dateformat.format(date);
+		}
+		else{
+			return "NULL";
+		}
+	}
+
+	public String getName(String userid){
+		User user = null;
+		try{
+			user = UserDirectoryService.getUser(userid);
+			String displayName = user.getDisplayName();
+			return displayName;
+		} catch(UserNotDefinedException e){
+			return null;
+		}
+	}
+	
+	//modifikasi
 	public void fillComponents(UIContainer tofill, ViewParameters viewParams, ComponentChecker checker) {
 		GeneralViewParameters params = (GeneralViewParameters) viewParams;
 
@@ -410,11 +434,28 @@ public class ShowPageProducer implements ViewComponentProducer, DefaultView, Nav
 		UIOutput.make(tofill, "portletBody").decorate(new UIFreeAttributeDecorator("sakaimajor", Integer.toString(majorVersion)))
 		    .decorate(new UIFreeAttributeDecorator("sakaiversion", fullVersion));
 
-		// Editscreitp
+		
+		// Editscript
+		SimplePage currentPageL = simplePageBean.getCurrentPage();		    
+	
+		String ownerL = currentPageL.getOwner();
+		String ownerNameL = getName(ownerL);
 
-		UIOutput.make(tofill,"createdname", simplePageBean.getPageOwner());
-		UIOutput.make(tofill,"createdate", simplePageBean.getDate());
-		UIOutput.make(tofill,"lastmodified", simplePageBean.getLastModified());
+		String modifier = currentPageL.getLastModifiedBy();
+		String modifierName = getName(modifier);
+
+		UIOutput.make(tofill,"createdname", ownerNameL);
+		UIOutput.make(tofill,"createdate", stringDate(currentPageL.getReleaseDate()));
+
+		UIOutput.make(tofill,"lastname", modifierName);
+		UIOutput.make(tofill,"lastdate", stringDate(currentPageL.getLastModified()));
+
+		
+		
+
+		// UIOutput.make(tofill,"createdname", simplePageBean.getPageOwner());
+		// UIOutput.make(tofill,"createdate", simplePageBean.getDate());
+		// UIOutput.make(tofill,"lastmodified", simplePageBean.getLastModified());
 
 		boolean iframeJavascriptDone = false;
 
